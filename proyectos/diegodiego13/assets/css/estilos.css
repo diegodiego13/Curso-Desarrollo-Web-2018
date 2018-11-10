@@ -1,0 +1,146 @@
+
+/*importar fuente*/
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
+
+/*Normalizar el documento*/
+
+* {
+    margin: 0; padding:  0; box-sizing: border-box;
+}
+
+body{
+    font-family: 'Lato', 'Arial', sans-serif;
+}
+
+/*definir varibles*/
+:root {
+    /*Variables de color*/
+    --c-primario:#D1DBBD;
+    --c-secundario:#91AA9D;
+    --c-terciario:#3E606F;
+    --c-claro: #FCFFF5;
+    --c-oscuro: #193441;
+
+    /*dimension del iframe*/
+    --iframe-width: 650px;
+    --iframe-height: 450px;
+    
+
+}
+/*=============> layout de la aplicación de css grid<==============*/
+.contenedor{
+    background: var(--c-claro);
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr 50px;
+    overflow-x: hidden;
+}
+
+.header{
+    background: var(--c-primario);
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    
+}
+
+.menu{
+    background: var(--c-secundario); 
+    display: none;
+    
+}
+.main{
+    background: var(--c-oscuro);
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+.footer{
+    background: var(--c-terciario);
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+}
+
+
+
+
+/*Estilos para el contenido principal */
+.main{
+    padding: 1em;
+}
+
+.main .instruccion{
+    width: 90%;
+    margin: 0 auto;
+    background:  var(--c-secundario);
+    padding: 5px;
+    border-radius: 10px;
+
+}
+
+.main .instruccion p{
+    margin: 0 ; padding: 0;
+    text-align: center;
+    font-weight: bold;
+    
+    
+
+}
+
+.main .contenedor-iframe{
+
+    width: 90%;
+    margin: 0 auto;
+    /*border: 5px solid yellow;*/
+    text-align: center;
+    background: var(--c-claro);
+    overflow-x: auto;
+    margin-top: 0.5em;
+}
+.main .contenedor-iframe iframe{
+    width: var(--iframe-width);
+    height: var(--iframe-height);
+   
+}
+
+/*Estilos para la barra de navegacion*/
+
+.nav *{
+    color: var(--c-claro);
+}
+.nav .navlinks li{
+    text-align: center;
+    margin: 0 auto;   
+    transition:  0.5ms;
+}
+
+.nav .navlinks li:hover{
+    background: #91AA9D;
+}
+
+
+/*Normalizar listas y links */
+.listalinks{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.listalinks li a{
+    text-decoration: none;
+}
+
+.nav .menu-open{
+    display: inline-block;
+    margin: 5px auto 5px 15px;
+    font-size: 25px;
+    cursor: pointer;
+}
+.nav{
+    position: relative;
+}
+.nav .nav-toggle {
+    position: absolute;
+    right: 15px;
+    
+}
