@@ -6,53 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Repositorio de Actividades Educativas</title>
-    <link rel="stylesheet" href="assets/css/estilos.css">
-    <link rel="stylesheet" href="assets/ex/feathericon/css/feathericon.min.css">
+    <link rel="stylesheet" href="assets/ext/feathericon/css/feathericon.min.css">
+    <link rel="stylesheet" href="assets/css/estilo.css">
 </head>
 
 <body>
     <div class="contenedor">
         <header class="header">
             <nav class="nav">
-
-            <span class="menu-open" id ="menu-open">
+                <span class="menu-open icono-grande" id="btn-menu-open">
                     <i class="fe fe-list-bullet"></i>
-            </span>
-
-            <span class="nav- toggle" id ="btn-nav-open">
-                <i class="fe fe-bar"></i>
-            </span>
-
-            <ul class="navlinks listalinks">
-                    <li><a href="">Inicio</a></li>
-                    <li><a href="">Contacto</a></li>
-                    <li><a href="">Nueva Actividad</a></li>
-            </ul>
-
-        </nav>
+                </span>
+                <span class="nav-toggle icono-grande" id="btn-nav-toggle">
+                    <i class="fe fe-bar"></i>
+                </span>
+                <ul class="nav-links lista-links" id="nav-links">
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#">Dudas</a></li>
+                    <li><a href="#">Nueva actividad</a></li>
+                </ul>
+            </nav>
         </header>
-
-        <div class="menu">
-            <ul class="menulinks listalinks">
-                <li><a href="">1</a></li>
-                <li><a href="">2</a></li>
-                <li><a href="">3</a></li>
-                <li><a href="">4</a></li>
-                <li><a href="">5</a></li>
+        <div class="menu" id="menu-lateral">
+            <span class="menu-close" id="btn-menu-close">
+                <i class="fe fe-close"></i>
+            </span>
+            <ul class="menu-links lista-links" id="menu-links">
+                <li><a href="#">Angular</a></li>
+                <li><a href="#">VueJS</a></li>
+                <li><a href="#">React</a></li>
+                <li><a href="#">Ember</a></li>
+                <li><a href="#">Backbone</a></li>
             </ul>
         </div>
         <section class="main">
-            <div class="instruccion">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia atque eos non ratione, dolorum facilis aut debitis labore sapiente sequi, at veritatis optio commodi cumque unde! Totam possimus libero velit?</p>
+            <div class="instruccion" id="TxtInstruccion">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea natus excepturi repudiandae possimus facilis dolorum sit cupiditate nam, aperiam repellat, temporibus odit numquam? Rerum magni totam modi hic exercitationem placeat?</p>
             </div>
             <div class="contenedor-iframe">
-                <iframe id="iframe" src="https://angular.io" ></iframe>
+                <iframe id="iframe" name="name-iframe" src="assets/uploads/actividades/actividad-normal/index.html"></iframe>
             </div>
         </section>
         <footer class="footer">
-            <p>Hecho por Diego Ramos - &copy; 2018 </p>
+            <p>Hecho por Valentina Tabares Morales - &copy; 2018</p>
+
         </footer>
     </div>
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>
