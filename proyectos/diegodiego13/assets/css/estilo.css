@@ -15,7 +15,7 @@ body {
     /*Variables de colores principales*/
     --c-primario: #3CBAC8;
     --c-secundario: #93EDD4;
-    --c-terciario: #FFA688;
+    --c-terciario: rgb(177, 147, 137);
     --c-claro: #F3F5C4;
     --c-oscuro: #F9CB8F;
     --c-masoscuro: #3CBAFA;

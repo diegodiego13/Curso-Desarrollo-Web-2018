@@ -5,6 +5,7 @@ var btnMenuClose = document.getElementById("btn-menu-close");
 var btnNavToggle = document.getElementById("btn-nav-toggle");
 var navLinks = document.getElementById("nav-links");
 
+//Para agregar una función a un elemento del documento se utiliza el addEventListener
 btnMenuOpen.addEventListener("click",mostrarMenuLateral);
 btnMenuClose.addEventListener("click",ocultarMenuLateral);
 btnNavToggle.addEventListener("click",toggleNavLinks);
@@ -30,7 +31,6 @@ function arreglarNavLinks() {
         navLinks.classList.remove("mostrar");
     }
 }
-
 function cargarDatos() {
     var datos = [
         {url: "//unal.edu.co", nombre: "UNAL", instruccion: "Instrucción UNAL"},
@@ -42,35 +42,29 @@ function cargarDatos() {
     return datos;
 }
 
-function generarLinks() {
-    var menuLinks = document.getElementById("menu-links");
-    var divInstruc = document.getElementById("TxtInstruccion");
-    menuLinks.innerHTML = "";
-
-    var links = cargarDatos();
-    console.table(links);
-    if(links.length > 0) {
-        //Llegaron datos
-        for(var i = 0; i < links.length; i++) {
-            var texto = document.createTextNode(links[i].nombre);
-            var instru = document.createTextNode(links[i].instruccion);
-            divInstruc.appendChild(instru);
-            var link = document.createElement("a");
-            link.href = links[i].url;
-            link.target = "name-iframe";
+function generarLinks(){
+    var menuLinks=document.getElementById("menu-links");
+    menuLinks.innerHTML= "";
+    var links= cargarDatos();
+    if(links.length>0){
+        //Cargaron los datos
+        for (var i = 0; i < links.length; i++) {
+            var texto=document.createTextNode(links[i].nombre);
+            var link=document.createElement("a");
+            //Le  vamos a poner un atributo
+            link.href=links[i].url;
+            link.target="main-iframe";
             link.appendChild(texto);
-
-            var itemLista = document.createElement("li");
+            var itemLista=document.createElement("li");
             itemLista.appendChild(link);
-
             menuLinks.appendChild(itemLista);
         }
-    }else{
-        var texto = document.createTextNode("No se ha encontrado ninguna actividad");
-        var itemLista = document.createElement("li");
+    }
+    else{
+        //No llegaron los datows
+        var texto=document.createTextNode("No se ha encontrado ninguna actividad");
+        var itemLista=document.createElement("li");
         itemLista.appendChild(texto);
-        menuLinks.appendChild(itemLista);
     }
 }
-
 generarLinks();
