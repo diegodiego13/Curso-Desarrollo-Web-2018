@@ -11,5 +11,7 @@ class InicioControlador {
         $this->view = $view;
     }
 
-    //public function paginaInicio($request, $response)
+    public function paginaInicio($request, $response){
+        return $this->view->render($response,'inicio.twig');
+    }
 }

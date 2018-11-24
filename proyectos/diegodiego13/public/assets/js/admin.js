@@ -1,121 +1,76 @@
-// Referencias a elementos HTML
-var btnAbrirModal = document.getElementById('btn-abrir-modal');
-var btnCerrarModal = document.getElementById('btn-cerrar-modal');
-var modalCargarActividad = document.getElementById('modal-cargar-actividad');
+var btnMenuOpen= document.getElementById("btn-menu-open");
+var menuLateral= document.getElementById("menu-lateral");
+var btnMenuClose= document.getElementById("btn-menu-close");
+var btnNavToggle= document.getElementById("btn-nav-toggle");
+var navLinks= document.getElementById("nav-links");
 
-var formCargarActividad = document.getElementById('form-cargar-actividad');
-var tablaActividades = document.getElementById('tabla-actividades');
+//Para agregar una función a un elemento del documento se utiliza el addEventListener
+btnMenuOpen.addEventListener("click",mostrarMenuLateral);
+btnMenuClose.addEventListener("click", ocultarMenuLateral);
+btnNavToggle.addEventListener("click", toggleNaveLinks);
+window.addEventListener("resize",arreglarNavLinks);
 
-var csrfName = document.getElementById('csrfname');
-var csrfValue = document.getElementById('csrfvalue');
-
-// Asociación de funciones a eventos
-btnAbrirModal.addEventListener("click", mostrarModal);
-btnCerrarModal.addEventListener("click", cerrarModal);
-
-// cargarActividad.submit
-
-// Definición de funciones personalizadas
-function mostrarModal() {
-    modalCargarActividad.classList.add("mostrar");
+function mostrarMenuLateral(){
+    //Agregamos una clase a un elemento
+    menuLateral.classList.add("mostrar");
 }
 
-function cerrarModal() {
-    modalCargarActividad.classList.remove("mostrar");
-    reiniciarFormCargarActividad();
+
+function ocultarMenuLateral(){
+    //Quitamos la clase del elemento
+    menuLateral.classList.remove("mostrar")
 }
 
-// function cargarActividad
+function toggleNaveLinks(){
+    navLinks.classList.toggle("mostrar");
 
-function mostrarErroresFormCargarActividad(form, errores) {
-    if (errores.nombre) {
-        form.elements.nombre.nextElementSibling.textContent = errores.nombre;
-        form.elements.nombre.parentElement.classList.add("error");
-    }
-    if (errores.instruccion) {
-        form.elements.instruccion.nextElementSibling.textContent = errores.instruccion;
-        form.elements.instruccion.parentElement.classList.add("error");
-    }
-    if (errores.descripcion) {
-        form.elements.descripcion.nextElementSibling.textContent = errores.descripcion;
-        form.elements.descripcion.parentElement.classList.add("error");
-    }
-    if (errores.categoria) {
-        form.elements.categoria.nextElementSibling.textContent = errores.categoria;
-        form.elements.categoria.parentElement.classList.add("error");
-    }
-    if (errores.archivo) {
-        form.elements.archivo.nextElementSibling.textContent = errores.archivo;
-        form.elements.archivo.parentElement.classList.add("error");
-    }
 }
 
-function reiniciarFormCargarActividad() {
-    formCargarActividad.reset();
-    var items = formCargarActividad.querySelectorAll(".controles li");
-    items.forEach(function (item) {
-        item.classList.remove("error");
-    });
+function arreglarNavLinks() {
+    if(window.innerWidth >= 900){
+        navLinks.classList.remove("mostrar");
+    }
+}
+function cargarDatos() {
+    var datos = [
+        {url: "//unal.edu.co", nombre: "UNAL", instruccion: "Instrucción UNAL"},
+        {url: "//css-tricks.com", nombre: "CSS Tricks", instruccion: "Instrucción CSS"},
+        {url: "//gaia.manizales.unal.edu.co", nombre: "GAIA", instruccion: "Instrucción GAIA"},
+        {url: "assets/uploads/actividades/actividad-normal/index.html", nombre: "Determinar operación", instruccion: "Operaciones simples"},
+        {url: "assets/uploads/actividades/actividad-canvas/index.html", nombre: "Arrastrar (Canvas)", instruccion: "Arrastrar implementando CANVAS"}
+    ];
+    return datos;
 }
 
-function agregarActividadTabla(actividad) {
-    var tbody = tablaActividades.querySelector("tbody");
+function generarLinks() {
+    var menuLinks = document.getElementById("menu-links");
+    var divInstruc = document.getElementById("TxtInstruccion");
+    menuLinks.innerHTML = "";
 
-    var celdaIndice = document.createElement("td");
-    var celdaNombre = document.createElement("td");
-    var celdaInstruccion = document.createElement("td");
-    var celdaDescripcion = document.createElement("td");
-    var celdaCategoria = document.createElement("td");
-    var celdaRuta = document.createElement("td");
-    var celdaEliminar = document.createElement("td");
+    var links = cargarDatos();
+    console.table(links);
+    if(links.length > 0) {
+        //Llegaron datos
+        for(var i = 0; i < links.length; i++) {
+            var texto = document.createTextNode(links[i].nombre);
+            // var instru = document.createTextNode(links[i].instruccion);
+            // divInstruc.appendChild(instru);
+            var link = document.createElement("a");
+            link.href = links[i].url;
+            link.target = "name-iframe";
+            link.appendChild(texto);
 
-    var indiceActual = tbody.querySelectorAll("tr").length + 1;
-    celdaIndice.textContent = indiceActual;
-    celdaNombre.textContent = actividad.nombre;
-    celdaInstruccion.textContent = actividad.instruccion;
-    celdaDescripcion.textContent = actividad.descripcion;
-    celdaCategoria.textContent = actividad.categoriaId;
-    celdaRuta.textContent = actividad.rutaArchivo;
+            var itemLista = document.createElement("li");
+            itemLista.appendChild(link);
 
-    var btnEliminar = document.createElement("button");
-    btnEliminar.classList = "btn rojo btn-eliminar";
-    btnEliminar.addEventListener("click", eliminarActividad.bind(null, btnEliminar, actividad.id));
-    btnEliminar.innerHTML = '<i class="fe fe-trash"></i></button>';
-    celdaEliminar.appendChild(btnEliminar);
-
-    var fila = document.createElement("tr");
-    fila.appendChild(celdaIndice);
-    fila.appendChild(celdaNombre);
-    fila.appendChild(celdaInstruccion);
-    fila.appendChild(celdaDescripcion);
-    fila.appendChild(celdaCategoria);
-    fila.appendChild(celdaRuta);
-    fila.appendChild(celdaEliminar);
-
-    tbody.appendChild(fila);
-    tablaActividades.parentNode.querySelector(".tabla-vacia").classList.remove("mostrar");
-}
-
-function eliminarActividad(elemento, actividadId) {
-    var continuar = confirm("¿Estás seguro que deseas eliminar esta actividad?");
-    if (continuar) {
-        var url = tablaActividades.dataset.urleliminar;
-        var params = {
-            'accion': 'ELIMINAR',
-            'id': actividadId
-        };
-        axios.get(url, {params: params})
-            .then(function (res) {
-                if(res.data.eliminado) {
-                    quitarActividadTabla(elemento);
-                }
-            }).catch(function (err) {
-                console.log(err.response);
-            });
+            menuLinks.appendChild(itemLista);
+        }
+    }else{
+        var texto = document.createTextNode("No se ha encontrado ninguna actividad");
+        var itemLista = document.createElement("li");
+        itemLista.appendChild(texto);
+        menuLinks.appendChild(itemLista);
     }
 }
 
-function quitarActividadTabla(elemento) {
-    var fila = elemento.closest("tr");
-    fila.parentNode.removeChild(fila);
-}
+generarLinks();
