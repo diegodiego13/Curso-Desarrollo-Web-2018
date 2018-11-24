@@ -1,14 +1,22 @@
-<!-- Todo -->
-
 {% extends "plantillas/base.twig" %}
 
-{% block titulo %} Inicio del Repositorio {% endblock %}
-{% block stylesheets %} 
+{% block titulo %}Inicio del Repositorio{% endblock %}
 
-     {{ parent() }}
-     <link rel="stylesheet" href="constant('APP_URL')_}}assets/js/general.js">">
-
-
-
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ constant('APP_URL') }}assets/css/inicio.css">
 {% endblock %}
 
+{% block contenido %}
+    <div class="contenedor">
+     <main class="main">
+         <div class="banner">
+             <h1 class="titulo">Repositorio de actividades educativas</h1>
+             <a href="#" class="link link-applicacion">Abrir aplicación</a>
+             <a href="#" class="link link-admin">Administrar</a>
+
+         </div>
+
+     </main>
+    </div>
+{% endblock %}
